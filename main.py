@@ -2,17 +2,15 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from ffpyplayer.player import MediaPlayer
-# 1. Load files and pictures 2. Perform grayscale processing 3. Get haar features 4. Detect faces 5. Mark
 
 
 def adaboost_method_png():
     face_xml = cv2.CascadeClassifier('adaboost/haarcascase_frontalface_default.xml')
-    # eye_xml = cv2.CascadeClassifier('adaboost/haarcascase_eye.xml')
+
     img = cv2.imread('img1.jpg')
     cv2.imshow('img', img)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # 1. Gray image 2. Zoom factor 3. Target size
     faces = face_xml.detectMultiScale(gray, 1.3, 5)
     print('face = ', len(faces))
     print(faces)
@@ -21,10 +19,6 @@ def adaboost_method_png():
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         roi_face = gray[y:y + h, x:x + w]
         roi_color = img[y:y + h, x:x + w]
-        # eyes = eye_xml.detectMultiScale(roi_face)
-        # print('eyes = ', len(eyes))
-        # for (ex, ey, ew, eh) in eyes:
-        #     cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
     cv2.imshow('dat', img)
     cv2.waitKey(0)
 
@@ -65,5 +59,9 @@ def adaboost_method_video():
 
 
 if __name__ == '__main__':
-    # adaboost_method_png()
-    adaboost_method_video()
+    str = input()
+    if str == 'video':
+        adaboost_method_video()
+    else:
+        adaboost_method_png()
+
