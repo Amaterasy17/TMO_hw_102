@@ -7,11 +7,16 @@ from ffpyplayer.player import MediaPlayer
 def adaboost_method_png():
     face_xml = cv2.CascadeClassifier('adaboost/haarcascase_frontalface_default.xml')
 
-    img = cv2.imread('img1.jpg')
+    img = cv2.imread('image4.jpg')
     cv2.imshow('img', img)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_xml.detectMultiScale(gray, 1.3, 5)
+    faces = face_xml.detectMultiScale(
+        gray,
+        scaleFactor=1.1,
+        minNeighbors=5,
+        minSize=(30, 30)
+    )
     print('face = ', len(faces))
     print(faces)
     # Draw a face, draw a box for the face
